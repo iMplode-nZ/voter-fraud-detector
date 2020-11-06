@@ -1,6 +1,10 @@
 'use strict';
 
-const input = document.getElementById('submit');
+const input = document.createElement('input');
+input.type = 'file';
+input.style.display = 'none';
+document.body.appendChild(input);
+input.click();
 input.onchange = () => {
     console.log('Loading File...');
     const file = input.files[0];
