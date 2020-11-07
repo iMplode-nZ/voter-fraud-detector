@@ -60,7 +60,10 @@ function workerFunction() {
             while (true) {
                 const line = readLine();
                 const yearDifference = ELECTION_YEAR - new Date(line[dateOfBirthIndex]).getFullYear();
-                if (yearDifference > settings.tolerance) {
+                // The reason some birth dates will display as 1/1/1800 is
+                // due to confidentiality reasons of the registered votes.
+                // (According to the pennsylvania dataset)
+                if (yearDifference > settings.tolerance && ! line[dateOfBirthIndex].includes('1800')) {
                     addTotal(partyUnusualTotals, line[partyIndex]);
                     const registerDate = new Date(line[registerYearIndex]).getFullYear();
                     if (!yearOfRegistration[registerDate]) {
